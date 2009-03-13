@@ -1,0 +1,277 @@
+  [4;36;1mSQL (0.6ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.5ms)[0m   [0mselect sqlite_version(*)[0m
+  [4;36;1mSQL (2.1ms)[0m   [0;1mCREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) [0m
+  [4;35;1mSQL (1.8ms)[0m   [0mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [4;36;1mSQL (1.1ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.4ms)[0m   [0mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.5ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (1.1ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.5ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT version FROM schema_migrations[0m
+Migrating to HoboMigration1 (20090313205516)
+  [4;35;1mSQL (0.3ms)[0m   [0mselect sqlite_version(*)[0m
+  [4;36;1mSQL (14.6ms)[0m   [0;1mCREATE TABLE "skype_users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "username" varchar(255), "extension" varchar(255), "status" varchar(255), "keywords" varchar(255), "created_at" datetime, "updated_at" datetime) [0m
+  [4;35;1mSQL (2.5ms)[0m   [0mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "crypted_password" varchar(40), "salt" varchar(40), "remember_token" varchar(255), "remember_token_expires_at" datetime, "name" varchar(255), "email_address" varchar(255), "administrator" boolean DEFAULT 'f', "created_at" datetime, "updated_at" datetime, "state" varchar(255) DEFAULT 'active', "key_timestamp" datetime) [0m
+  [4;36;1mSQL (2.0ms)[0m   [0;1mINSERT INTO schema_migrations (version) VALUES ('20090313205516')[0m
+  [4;35;1mSQL (0.7ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSELECT version FROM schema_migrations[0m
+  [4;35;1mSQL (0.5ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mPRAGMA index_list("skype_users")[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mPRAGMA index_list("users")[0m
+  [4;36;1mSQL (1.4ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+
+
+Processing FrontController#index (for 127.0.0.1 at 2009-03-13 13:56:04) [GET]
+
+
+CGI::Session::CookieStore::TamperedWithCookie (CGI::Session::CookieStore::TamperedWithCookie):
+    /opt/local/lib/ruby/gems/1.8/gems/actionpack-2.2.2/lib/action_controller/session/cookie_store.rb:145:in `unmarshal'
+    /opt/local/lib/ruby/gems/1.8/gems/actionpack-2.2.2/lib/action_controller/session/cookie_store.rb:102:in `restore'
+    /opt/local/lib/ruby/1.8/cgi/session.rb:310:in `[]'
+    /opt/local/lib/ruby/gems/1.8/gems/actionpack-2.2.2/lib/action_controller/cgi_process.rb:98:in `session'
+    /opt/local/lib/ruby/gems/1.8/gems/actionpack-2.2.2/lib/action_controller/cgi_process.rb:130:in `stale_session_check!'
+    /opt/local/lib/ruby/gems/1.8/gems/actionpack-2.2.2/lib/action_controller/cgi_process.rb:78:in `session'
+    /opt/local/lib/ruby/gems/1.8/gems/actionpack-2.2.2/lib/action_controller/base.rb:1205:in `assign_shortcuts_without_flash'
+    /opt/local/lib/ruby/gems/1.8/gems/actionpack-2.2.2/lib/action_controller/flash.rb:166:in `assign_shortcuts'
+    /opt/local/lib/ruby/gems/1.8/gems/actionpack-2.2.2/lib/action_controller/base.rb:519:in `process_without_filters'
+    /opt/local/lib/ruby/gems/1.8/gems/actionpack-2.2.2/lib/action_controller/filters.rb:606:in `process_without_session_management_support'
+    /opt/local/lib/ruby/gems/1.8/gems/actionpack-2.2.2/lib/action_controller/session_management.rb:134:in `process'
+    /opt/local/lib/ruby/gems/1.8/gems/actionpack-2.2.2/lib/action_controller/base.rb:392:in `process'
+    /opt/local/lib/ruby/gems/1.8/gems/actionpack-2.2.2/lib/action_controller/dispatcher.rb:183:in `handle_request'
+    /opt/local/lib/ruby/gems/1.8/gems/actionpack-2.2.2/lib/action_controller/dispatcher.rb:110:in `dispatch_unlocked'
+    /opt/local/lib/ruby/gems/1.8/gems/actionpack-2.2.2/lib/action_controller/dispatcher.rb:123:in `dispatch'
+    /opt/local/lib/ruby/gems/1.8/gems/actionpack-2.2.2/lib/action_controller/dispatcher.rb:122:in `synchronize'
+    /opt/local/lib/ruby/gems/1.8/gems/actionpack-2.2.2/lib/action_controller/dispatcher.rb:122:in `dispatch'
+    /opt/local/lib/ruby/gems/1.8/gems/actionpack-2.2.2/lib/action_controller/dispatcher.rb:132:in `dispatch_cgi'
+    /opt/local/lib/ruby/gems/1.8/gems/actionpack-2.2.2/lib/action_controller/dispatcher.rb:39:in `dispatch'
+    /opt/local/lib/ruby/gems/1.8/gems/rails-2.2.2/lib/webrick_server.rb:103:in `handle_dispatch'
+    /opt/local/lib/ruby/gems/1.8/gems/rails-2.2.2/lib/webrick_server.rb:74:in `service'
+    /opt/local/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+    /opt/local/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+    /opt/local/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+    /opt/local/lib/ruby/1.8/webrick/server.rb:162:in `start'
+    /opt/local/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+    /opt/local/lib/ruby/1.8/webrick/server.rb:95:in `start'
+    /opt/local/lib/ruby/1.8/webrick/server.rb:92:in `each'
+    /opt/local/lib/ruby/1.8/webrick/server.rb:92:in `start'
+    /opt/local/lib/ruby/1.8/webrick/server.rb:23:in `start'
+    /opt/local/lib/ruby/1.8/webrick/server.rb:82:in `start'
+    /opt/local/lib/ruby/gems/1.8/gems/rails-2.2.2/lib/webrick_server.rb:60:in `dispatch'
+    /opt/local/lib/ruby/gems/1.8/gems/rails-2.2.2/lib/commands/servers/webrick.rb:66
+    /opt/local/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:31:in `gem_original_require'
+    /opt/local/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:31:in `require'
+    /Users/jsgoecke/.gem/ruby/1.8/gems/activesupport-2.2.2/lib/active_support/dependencies.rb:153:in `require'
+    /Users/jsgoecke/.gem/ruby/1.8/gems/activesupport-2.2.2/lib/active_support/dependencies.rb:521:in `new_constants_in'
+    /Users/jsgoecke/.gem/ruby/1.8/gems/activesupport-2.2.2/lib/active_support/dependencies.rb:153:in `require'
+    /opt/local/lib/ruby/gems/1.8/gems/rails-2.2.2/lib/commands/server.rb:49
+    /opt/local/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:31:in `gem_original_require'
+    /opt/local/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:31:in `require'
+    script/server:3
+
+Rendered /opt/local/lib/ruby/gems/1.8/gems/actionpack-2.2.2/lib/action_controller/templates/rescues/_trace (44.6ms)
+Rendered /opt/local/lib/ruby/gems/1.8/gems/actionpack-2.2.2/lib/action_controller/templates/rescues/_request_and_response (1.3ms)
+Rendering /opt/local/lib/ruby/gems/1.8/gems/actionpack-2.2.2/lib/action_controller/templates/rescues/layout.erb (internal_server_error)
+  [4;35;1mSQL (1.0ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+
+
+Processing FrontController#index (for 127.0.0.1 at 2009-03-13 13:56:11) [GET]
+Rendering front/index
+  DRYML: Compiled /opt/local/lib/ruby/gems/1.8/gems/hobo-0.8.5/taglibs/core.dryml in 0.04s
+  DRYML: Compiled /opt/local/lib/ruby/gems/1.8/gems/hobo-0.8.5/taglibs/rapid_core.dryml in 0.38s
+  DRYML: Compiled /opt/local/lib/ruby/gems/1.8/gems/hobo-0.8.5/taglibs/rapid_support.dryml in 0.03s
+  DRYML: Compiled /opt/local/lib/ruby/gems/1.8/gems/hobo-0.8.5/taglibs/rapid_document_tags.dryml in 0.10s
+  DRYML: Compiled /opt/local/lib/ruby/gems/1.8/gems/hobo-0.8.5/taglibs/rapid_pages.dryml in 0.43s
+  DRYML: Compiled /opt/local/lib/ruby/gems/1.8/gems/hobo-0.8.5/taglibs/rapid_editing.dryml in 0.15s
+  DRYML: Compiled /opt/local/lib/ruby/gems/1.8/gems/hobo-0.8.5/taglibs/rapid_forms.dryml in 0.57s
+  DRYML: Compiled /opt/local/lib/ruby/gems/1.8/gems/hobo-0.8.5/taglibs/rapid_navigation.dryml in 0.19s
+  DRYML: Compiled /opt/local/lib/ruby/gems/1.8/gems/hobo-0.8.5/taglibs/rapid_plus.dryml in 0.22s
+  DRYML: Compiled /opt/local/lib/ruby/gems/1.8/gems/hobo-0.8.5/taglibs/rapid_generics.dryml in 0.15s
+  DRYML: Compiled /opt/local/lib/ruby/gems/1.8/gems/hobo-0.8.5/taglibs/rapid_lifecycles.dryml in 0.02s
+  DRYML: Compiled /opt/local/lib/ruby/gems/1.8/gems/hobo-0.8.5/taglibs/rapid.dryml in 2.26s
+  DRYML: Compiled app/views/taglibs/auto/rapid/cards.dryml in 0.06s
+  DRYML: Compiled app/views/taglibs/auto/rapid/pages.dryml in 0.56s
+  DRYML: Compiled app/views/taglibs/auto/rapid/forms.dryml in 0.14s
+  DRYML: Compiled app/views/taglibs/themes/clean/clean.dryml in 0.04s
+  DRYML: Compiled app/views/taglibs/application.dryml in 3.08s
+  DRYML: Compiled app/views/front/index.dryml in 3.19s
+  [4;36;1mUser Load (0.4ms)[0m   [0;1mSELECT * FROM "users" LIMIT 10[0m
+  [4;35;1mSQL (0.5ms)[0m   [0mSELECT count(*) AS count_all FROM "skype_users" LIMIT 6[0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT count(*) AS count_all FROM "skype_users" LIMIT 6[0m
+  [4;35;1mSkypeUser Load (0.4ms)[0m   [0mSELECT * FROM "skype_users" ORDER BY skype_users.created_at DESC LIMIT 6[0m
+Completed in 3298ms (View: 3279, DB: 1) | 200 OK [http://localhost/]
+  [4;36;1mSQL (0.9ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+
+
+Processing UsersController#signup (for 127.0.0.1 at 2009-03-13 13:56:19) [GET]
+  Parameters: {"action"=>"signup", "controller"=>"users"}
+Rendering users/signup
+  DRYML: Compiled /opt/local/lib/ruby/gems/1.8/gems/hobo-0.8.5/taglibs/rapid_user_pages.dryml in 0.39s
+  [4;35;1mUser Load (0.4ms)[0m   [0mSELECT * FROM "users" LIMIT 10[0m
+Completed in 840ms (View: 818, DB: 1) | 200 OK [http://localhost/users/signup]
+  [4;36;1mSQL (0.9ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+
+
+Processing UsersController#do_signup (for 127.0.0.1 at 2009-03-13 13:56:29) [POST]
+  Parameters: {"page_path"=>"users/signup", "action"=>"do_signup", "authenticity_token"=>"883bfab63fdf341a8bd8e61b9d5b0749f2bd67a5", "controller"=>"users", "user"=>{"name"=>"jsgoecke", "password_confirmation"=>"[FILTERED]", "email_address"=>"jason@goecke.net", "password"=>"[FILTERED]"}}
+  [4;35;1mUser Exists (0.3ms)[0m   [0mSELECT "users".id FROM "users" WHERE ("users"."name" = 'jsgoecke') LIMIT 1[0m
+  [4;36;1mUser Exists (0.2ms)[0m   [0;1mSELECT "users".id FROM "users" WHERE (LOWER("users"."email_address") = 'jason@goecke.net') LIMIT 1[0m
+  [4;35;1mUser Exists (0.2ms)[0m   [0mSELECT "users".id FROM "users" WHERE ("users"."email_address" = 'jason@goecke.net') LIMIT 1[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSELECT count(*) AS count_all FROM "users" [0m
+  [4;35;1mUser Create (0.6ms)[0m   [0mINSERT INTO "users" ("salt", "name", "key_timestamp", "created_at", "crypted_password", "remember_token_expires_at", "updated_at", "administrator", "remember_token", "email_address", "state") VALUES('077bb8ee442e79fe32c793bc31815d8883d3555e', 'jsgoecke', NULL, '2009-03-13 20:56:29', '0ce3da8b8b15dad4101c5d78d620354289f39b78', NULL, '2009-03-13 20:56:29', 't', NULL, 'jason@goecke.net', 'active')[0m
+Redirected to 
+Completed in 157ms (DB: 3) | 302 Found [http://localhost/users/signup]
+  [4;36;1mSQL (1.0ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+
+
+Processing FrontController#index (for 127.0.0.1 at 2009-03-13 13:56:29) [GET]
+  [4;35;1mUser Load (1.1ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+Rendering front/index
+  [4;36;1mUser Load (1.7ms)[0m   [0;1mSELECT * FROM "users" LIMIT 10[0m
+  [4;35;1mSQL (0.6ms)[0m   [0mSELECT count(*) AS count_all FROM "skype_users" LIMIT 6[0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT count(*) AS count_all FROM "skype_users" LIMIT 6[0m
+  [4;35;1mSkypeUser Load (0.4ms)[0m   [0mSELECT * FROM "skype_users" ORDER BY skype_users.created_at DESC LIMIT 6[0m
+Completed in 276ms (View: 263, DB: 2) | 200 OK [http://localhost/]
+  [4;36;1mSQL (1.8ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+
+
+Processing SkypeUsersController#index (for 127.0.0.1 at 2009-03-13 13:56:32) [GET]
+  [4;35;1mUser Load (1.0ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;36;1mSkypeUser Load (0.3ms)[0m   [0;1mSELECT * FROM "skype_users" LIMIT 30 OFFSET 0[0m
+Rendering skype_users/index
+  [4;35;1mUser Load (1.0ms)[0m   [0mSELECT * FROM "users" LIMIT 10[0m
+Completed in 359ms (View: 342, DB: 4) | 200 OK [http://localhost/skype_users]
+  [4;36;1mSQL (0.9ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+
+
+Processing SkypeUsersController#new (for 127.0.0.1 at 2009-03-13 13:56:36) [GET]
+  [4;35;1mUser Load (1.0ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+Rendering skype_users/new
+  [4;36;1mUser Load (1.0ms)[0m   [0;1mSELECT * FROM "users" LIMIT 10[0m
+Completed in 420ms (View: 405, DB: 3) | 200 OK [http://localhost/skype_users/new]
+  [4;35;1mSQL (0.9ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+
+
+Processing SkypeUsersController#create (for 127.0.0.1 at 2009-03-13 13:57:00) [POST]
+  Parameters: {"page_path"=>"skype_users/new", "authenticity_token"=>"883bfab63fdf341a8bd8e61b9d5b0749f2bd67a5", "skype_user"=>{"name"=>"Jason Goecke", "extension"=>"3000", "username"=>"jsgoecke", "status"=>"Online", "keywords"=>""}}
+  [4;36;1mUser Load (1.0ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;35;1mSkypeUser Create (0.5ms)[0m   [0mINSERT INTO "skype_users" ("name", "created_at", "extension", "updated_at", "username", "status", "keywords") VALUES('Jason Goecke', '2009-03-13 20:57:00', '3000', '2009-03-13 20:57:00', 'jsgoecke', 'Online', '')[0m
+Redirected to /skype_users/1-jason-goecke
+Completed in 51ms (DB: 2) | 302 Found [http://localhost/skype_users]
+  [4;36;1mSQL (1.6ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+
+
+Processing SkypeUsersController#show (for 127.0.0.1 at 2009-03-13 13:57:00) [GET]
+  Parameters: {"id"=>"1-jason-goecke"}
+  [4;35;1mUser Load (1.0ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;36;1mSkypeUser Load (0.8ms)[0m   [0;1mSELECT * FROM "skype_users" WHERE ("skype_users"."id" = 1) [0m
+Rendering skype_users/show
+  [4;35;1mUser Load (1.0ms)[0m   [0mSELECT * FROM "users" LIMIT 10[0m
+Completed in 373ms (View: 356, DB: 4) | 200 OK [http://localhost/skype_users/1-jason-goecke]
+  [4;36;1mSQL (4.9ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+
+
+Processing FrontController#index (for 127.0.0.1 at 2009-03-13 14:24:08) [GET]
+  [4;35;1mUser Load (1.7ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+Rendering front/index
+  DRYML: Compiled /opt/local/lib/ruby/gems/1.8/gems/hobo-0.8.5/taglibs/core.dryml in 0.05s
+  DRYML: Compiled /opt/local/lib/ruby/gems/1.8/gems/hobo-0.8.5/taglibs/rapid_core.dryml in 0.38s
+  DRYML: Compiled /opt/local/lib/ruby/gems/1.8/gems/hobo-0.8.5/taglibs/rapid_support.dryml in 0.03s
+  DRYML: Compiled /opt/local/lib/ruby/gems/1.8/gems/hobo-0.8.5/taglibs/rapid_document_tags.dryml in 0.09s
+  DRYML: Compiled /opt/local/lib/ruby/gems/1.8/gems/hobo-0.8.5/taglibs/rapid_pages.dryml in 0.41s
+  DRYML: Compiled /opt/local/lib/ruby/gems/1.8/gems/hobo-0.8.5/taglibs/rapid_editing.dryml in 0.20s
+  DRYML: Compiled /opt/local/lib/ruby/gems/1.8/gems/hobo-0.8.5/taglibs/rapid_forms.dryml in 0.46s
+  DRYML: Compiled /opt/local/lib/ruby/gems/1.8/gems/hobo-0.8.5/taglibs/rapid_navigation.dryml in 0.24s
+  DRYML: Compiled /opt/local/lib/ruby/gems/1.8/gems/hobo-0.8.5/taglibs/rapid_plus.dryml in 0.21s
+  DRYML: Compiled /opt/local/lib/ruby/gems/1.8/gems/hobo-0.8.5/taglibs/rapid_generics.dryml in 0.14s
+  DRYML: Compiled /opt/local/lib/ruby/gems/1.8/gems/hobo-0.8.5/taglibs/rapid_lifecycles.dryml in 0.02s
+  DRYML: Compiled /opt/local/lib/ruby/gems/1.8/gems/hobo-0.8.5/taglibs/rapid.dryml in 2.23s
+  DRYML: Compiled app/views/taglibs/auto/rapid/cards.dryml in 0.05s
+  DRYML: Compiled app/views/taglibs/auto/rapid/pages.dryml in 0.52s
+  DRYML: Compiled app/views/taglibs/auto/rapid/forms.dryml in 0.13s
+  DRYML: Compiled app/views/taglibs/themes/clean/clean.dryml in 0.03s
+  DRYML: Compiled app/views/taglibs/application.dryml in 2.99s
+  DRYML: Compiled app/views/front/index.dryml in 3.12s
+  [4;36;1mUser Load (1.0ms)[0m   [0;1mSELECT * FROM "users" LIMIT 10[0m
+  [4;35;1mSQL (0.5ms)[0m   [0mSELECT count(*) AS count_all FROM "skype_users" LIMIT 6[0m
+  [4;36;1mSkypeUser Load (0.9ms)[0m   [0;1mSELECT * FROM "skype_users" ORDER BY skype_users.created_at DESC LIMIT 6[0m
+Completed in 3268ms (View: 3252, DB: 2) | 200 OK [http://localhost/]
+  [4;35;1mSQL (1.0ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+
+
+Processing SkypeUsersController#index (for 127.0.0.1 at 2009-03-13 14:24:15) [GET]
+  [4;36;1mUser Load (1.0ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;35;1mSkypeUser Load (0.8ms)[0m   [0mSELECT * FROM "skype_users" LIMIT 30 OFFSET 0[0m
+Rendering skype_users/index
+  [4;36;1mUser Load (1.0ms)[0m   [0;1mSELECT * FROM "users" LIMIT 10[0m
+Completed in 369ms (View: 349, DB: 4) | 200 OK [http://localhost/skype_users]
+  [4;35;1mSQL (0.9ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+
+
+Processing FrontController#index (for 127.0.0.1 at 2009-03-13 14:24:18) [GET]
+  [4;36;1mUser Load (1.0ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+Rendering front/index
+  [4;35;1mUser Load (1.0ms)[0m   [0mSELECT * FROM "users" LIMIT 10[0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1mSELECT count(*) AS count_all FROM "skype_users" LIMIT 6[0m
+  [4;35;1mSkypeUser Load (0.9ms)[0m   [0mSELECT * FROM "skype_users" ORDER BY skype_users.created_at DESC LIMIT 6[0m
+Completed in 282ms (View: 269, DB: 2) | 200 OK [http://localhost/]

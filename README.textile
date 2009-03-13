@@ -1,0 +1,110 @@
+h1. Skype Utils
+
+An Adhearsion component that provides a collection of methods for the dialplan for interacting with the Skype for Asterisk channel.
+
+h2. Features
+
+  - Provide an automatic translation betwen Skype Username and Asterisk Extension
+  - Obtain all unique Skype Channel Variables when a Skype call arrives
+  - Track all Skype buddy statuses in memory or in the database
+
+h2. Requirements
+
+  - Adhearsion v0.8.x+
+  - Rails v2.2.2+
+  - Hobo v0.8.5+
+  - mislav-will_paginate v2.3.8+ (from Github)
+  - sqlite3-ruby v1.2.4+ (or the gem for whichever database you would like to use)
+
+h2. Installation
+
+In your ~ahn-project/components directory do:
+
+    git clone git://github.com/jsgoecke/skype_utils.git 
+
+Then cd to ~ahn-project/components/skype_utils/gui and do:
+
+    rake db:migrate RAILS_ENV="production"
+    script/server -e production (refer to Rails howtos for daemonizing as you wish)
+
+Then login to http://yourserver:3000 and configure your users. Lastly, connect your Adhearsion
+application to the Rails GUI by editing ~ahn-project/config/startup.rb:
+
+    config.enable_rails :path => 'components/skype_utils/gui', :env => :production
+
+h2. Dialplan Examples
+
+<pre><code>
+    #Example of dialing an Asterisk extension and then converting to a 
+    #Skype user to dial out over the Skype for Asterisk channel
+    outbound_extension {
+  
+      skype_user = skype_user_translation({ :translate => 'to_skype', :value => extension })
+      if skype_user
+        dial "Skype/" + skype_user
+      end
+  
+    }
+
+    #Example of an inbound call from the Skype network that shows the Skype 
+    #channel variables available, then translates to an Asterisk extension
+    #based on the Skype username
+    inbound_skype_call {
+  
+      skype_channel_variables = fetch_skype_channel_variables
+      ahn_log.skype.info skype_channel_variables.inspect
+  
+      asterisk_extension = skype_user_translation({ :translate => 'to_asterisk', :value => callerid })
+      if asterisk_user
+        dial "SIP/" + asterisk_extension
+      end  
+  
+    }</code></pre>
+
+h2. Skype Channel Variables
+
+Here is what is available:
+
+  - skype_languages - A space-separated list of language identifiers
+  - skype_topic - A user-provided string that can identify the 'topic'
+  - skype_token - Similar to skype_topic
+  - skype_about - 'about' profile entry
+  - skype_birthday - Birthday
+  - skype_gender - Gender
+  - skype_homepage - Home page URL
+  - skype_homephone - Home phone number
+  - skype_officephone - Office phone number
+  - skype_mobilephone - Mobile phone number
+  - skype_city - City name
+  - skype_province - State/Province name
+  - skype_country - Country name
+
+And here is an example of what is returned with the component method 'fetch_skype_channel_variables':
+
+<pre><code>
+INFO skype: {:skype_officephone=>"", :skype_about=>"Adhearsion (http://adhearsion.com)", :skype_mobilephone=>"", :skype_birthday=>"0", :skype_city=>"San Carlos", :skype_gender=>"1", :skype_province=>"CA", :skype_languages=>"en", :skype_homepage=>"http://blog.goecke.net", :skype_country=>"us", :skype_topic=>"", :skype_homephone=>"", :skype_token=>""}
+</code></pre>
+
+h2. License
+
+The MIT License
+ 
+Copyright (c) 2009 Jason Goecke
+ 
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+ 
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+ 
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.

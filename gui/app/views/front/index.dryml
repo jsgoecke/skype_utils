@@ -1,0 +1,27 @@
+<page title="Home">
+
+  <body: class="front-page"/>
+
+  <content:>
+    <header class="content-header">
+      <h1>Welcome to <app-name/></h1>
+      <section class="welcome-message">
+        <h3>The Skype Utils application allows you to:</h3>
+        <ul>
+          <li>Provide an automatic translation betwen Skype Username and Asterisk Extension</li>
+		  <li>Obtain all unique Skype Channel Variables when a Skype call arrives</li>
+		  <li>Track all Skype buddy statuses in memory or in the database</li>
+        </ul>
+      </section>
+    </header>
+
+    <section class="content-body" repeat="&front_models">
+      <div class="model">
+        <h3><type-name plural/></h3>
+        <collection:recent/>
+        <p if="&can_create? && linkable?(:new)">Create a <a to="&this" action="new"/>.</p>
+      </div>
+    </section>
+  </content:>
+  
+</page>

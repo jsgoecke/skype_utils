@@ -1,0 +1,5 @@
+#This may be any of the following:
+#   - database - Persist the status to the database table 'skype_users'
+#   - memory - Maintain the states in memory, does not require the database
+#   - both - persist to the database and to memory
+buddy_status_store: database
