@@ -3,6 +3,36 @@ initialization do
   ::Active_skype_status = ActiveSkypeStatus.new
 end
 
+methods_for :global do
+  #Used to fetch the status of a user
+  #takes a username and returns a string containing status
+  def skype_user_status?(username)
+    if COMPONENTS.skype_utils['buddy_status_store'] == 'database'
+      skype_user = SkypeUser.find_by_name username
+      return skype_user.status
+    else
+      return ::Active_skype_status.get_status(username)
+    end
+  end
+  
+  #Used to return all statuses of the users
+  #returns a hash containing all statuses
+  def skype_user_statuses?
+    if COMPONENTS.skype_utils['buddy_status_store'] == 'database'
+      skype_statuses = Hash.new
+      skype_users = SkypeUser.find(:all)
+      skype_users.each do |user|
+        if user.status != nil
+          skype_statuses.merge!({ user.username => { :status => user.status } })
+        end
+      end
+      return skype_statuses
+    else
+      return ::Active_skype_status.get_statuses
+    end
+  end
+end
+
 methods_for :dialplan do
   
   #Method that will fetch all available channel variables that may accompany a Skype call
@@ -57,50 +87,30 @@ methods_for :dialplan do
     end
   end
   
-  #Used to fetch the status of a user
-  #takes a username and returns a string containing status
-  def skype_user_status?(username)
-    if COMPONENTS.skype_utils['buddy_status_store'] == 'database'
-      skype_user = SkypeUser.find_by_name username
-      return skype_user.status
-    else
-      return ::Active_skype_status.get_status(username)
-    end
-  end
-  
-  #Used to return all statuses of the users
-  #returns a hash containing all statuses
-  def skype_user_statuses?
-    if COMPONENTS.skype_utils['buddy_status_store'] == 'database'
-      skype_statuses = Hash.new
-      skype_users = SkypeUser.find(:all)
-      skype_users.each do |user|
-        if user.status != nil
-          skype_statuses.merge!({ user.username => { :status => user.status } })
-        end
-      end
-      return skype_statuses
-    else
-      return ::Active_skype_status.get_statuses
-    end
-  end
-  
 end
 
 methods_for :events do
   
+  #Used to get the Skype username out of the Skype buddy that comes back
+  def get_skype_username(username)
+    username = username.split('@')
+    return username[1]
+  end
+  
   #Method that updates the status of a Skype user
   def skype_status_update(event)
+    username = get_skype_username event.headers['Buddy']
+    
     if COMPONENTS.skype_utils['buddy_status_store'] == 'database'
-      skype_user = SkypeUser.find_by_name event.headers['Buddy']
+      skype_user = SkypeUser.find_by_username username
       if skype_user
         skype_user.status = event.headers['BuddyStatus']
         skype_user.save
       else
         if COMPONENTS.skype_utils['store_unknown_buddies']
-          skype_user = SypeUser.new
-          skype_user.name = event.headers['Buddy']
-          skype_user.username = event.headers['Buddy']
+          skype_user = SkypeUser.new
+          skype_user.name = username
+          skype_user.username = username
           skype_user.status = event.headers['BuddyStatus']
           skype_user.save
         end
@@ -108,7 +118,7 @@ methods_for :events do
     end
     
     if COMPONENTS.skype_utils['buddy_status_store'] == 'memory' || COMPONENTS.skype_utils['buddy_status_store'] == 'both'
-      ::Active_skype_status.update_status(event.headers['Buddy'], event.headers['BuddyStatus'])
+      ::Active_skype_status.update_status(username, event.headers['BuddyStatus'])
     end
   end
   
@@ -117,9 +127,14 @@ end
 #Class for all of our Active call sessions
 class ActiveSkypeStatus
   
-  #Valid statuses
-  # click_to_call - for calls originated by a click to call request
-  # verfication - for calls initiated for verificiation
+  #Standard statuses
+  # Online - user is online
+  # Skype Me - user is available and asking to be 'Skyped'
+  # Away - the user is away from their Skype client
+  # Not Available - the user is not available for a call
+  # Do Not Disturb - the user does not want to be disturbed
+  # Offline (Voicemail Enabled) - the user is offline and has voicemail
+  # Offline (Voicemail Disabled) - the user is offline and has no voicemail
   
   #Initialize the sessions hash of hashes and a Mutex to handle threadsafe updates
   def initialize
