@@ -93,8 +93,18 @@ methods_for :events do
   def skype_status_update(event)
     if COMPONENTS.skype_utils['buddy_status_store'] == 'database'
       skype_user = SkypeUser.find_by_name event.headers['Buddy']
-      skype_user.status = event.headers['BuddyStatus']
-      skype_user.save
+      if skype_user
+        skype_user.status = event.headers['BuddyStatus']
+        skype_user.save
+      else
+        if COMPONENTS.skype_utils['store_unknown_buddies']
+          skype_user = SypeUser.new
+          skype_user.name = event.headers['Buddy']
+          skype_user.username = event.headers['Buddy']
+          skype_user.status = event.headers['BuddyStatus']
+          skype_user.save
+        end
+      end
     end
     
     if COMPONENTS.skype_utils['buddy_status_store'] == 'memory' || COMPONENTS.skype_utils['buddy_status_store'] == 'both'

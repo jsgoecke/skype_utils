@@ -1,5 +1,10 @@
-#This may be any of the following:
+#buddy_status_store may be any of the following:
 #   - database - Persist the status to the database table 'skype_users'
 #   - memory - Maintain the states in memory, does not require the database
 #   - both - persist to the database and to memory
 buddy_status_store: database
+
+#store_unknown_buddies may be true or false. If true, the component will store
+#buddies not already in your database in your databse with the Skype username as
+#both the username and the name of the new user
+store_unknown_buddies: true
