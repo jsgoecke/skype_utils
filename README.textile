@@ -1,12 +1,13 @@
 h1. Skype Utils
 
-An Adhearsion component that provides a collection of methods for the dialplan for interacting with the Skype for Asterisk channel.
+An Adhearsion component that provides a collection of methods for interacting with the Skype for Asterisk channel.
 
 h2. Features
 
-  - Provide an automatic translation betwen Skype Username and Asterisk Extension
-  - Obtain all unique Skype Channel Variables when a Skype call arrives
-  - Track all Skype buddy statuses in memory or in the database
+  - Provide an automatic translation betwen Skype Username and an Asterisk Extension for dialing in and out
+  - Obtain all unique Skype Channel Variables when a Skype call arrives (a wealth of info here, see below)
+  - Track all Skype buddy statuses in memory or in the database or both
+	- Statuses may be queried in the dialplan, in events or even over RPC (DRb, REST and STOMP)!
 
 h2. Requirements
 
@@ -32,7 +33,7 @@ application to the Rails GUI by editing ~ahn-project/config/startup.rb:
 
     config.enable_rails :path => 'components/skype_utils/gui', :env => :production
 
-h2. Dialplan Examples
+h2. Dialplan.rb Example
 
 <pre><code>
     #Example of dialing an Asterisk extension and then converting to a 
@@ -51,15 +52,42 @@ h2. Dialplan Examples
     #based on the Skype username
     inbound_skype_call {
   
+      #Get all of the relevant channel variables and log them
       skype_channel_variables = fetch_skype_channel_variables
       ahn_log.skype.info skype_channel_variables.inspect
   
       asterisk_extension = skype_user_translation({ :translate => 'to_asterisk', :value => callerid })
       if asterisk_user
         dial "SIP/" + asterisk_extension
-      end  
+      end 
+      
+      #Log the status of the Skype caller
+      ahn_log.dialplan.info skype_user_status? callerid 
+
+ 	  #Log all statuses that are available
+      ahn_log.diaplan.info skype_user_statuses
   
     }</code></pre>
+
+h2. Events.rb Example
+
+	<pre><code>
+  	# Standard statuses
+  	# Online - user is online
+  	# Skype Me - user is available and asking to be 'Skyped'
+  	# Away - the user is away from their Skype client
+  	# Not Available - the user is not available for a call
+  	# Do Not Disturb - the user does not want to be disturbed
+  	# Offline (Voicemail Enabled) - the user is offline and has voicemail
+  	# Offline (Voicemail Disabled) - the user is offline and has no voicemail
+
+		#Drop this into your events.rb file to track Skype users statuses
+		events.asterisk.manager_interface.each do |event|
+  		  if event.name == 'SkypeBuddyStatus'
+    	    skype_status_update(event)
+  		  end
+		end
+	</code></pre>
 
 h2. Skype Channel Variables
 
