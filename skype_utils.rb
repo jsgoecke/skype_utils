@@ -8,7 +8,7 @@ methods_for :global do
   #takes a username and returns a string containing status
   def skype_user_status?(username)
     if COMPONENTS.skype_utils['buddy_status_store'] == 'database'
-      skype_user = SkypeUser.find_by_name username
+      skype_user = SkypeUser.find_by_username username
       return skype_user.status
     else
       return ::Active_skype_status.get_status(username)
